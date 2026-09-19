@@ -1,12 +1,9 @@
-import { featureOptions, projectTypeOptions } from "./data/estimateOptions";
-import type { ProjectType } from "./types";
+import { featureOptions, projectTypeOptions } from "../data/estimateOptions";
+import type { ProjectType } from "../types";
 import { useState } from "react";
+import type { EstimateFormValues } from "../types";
 
-interface EstimateFormValues{
-    projectType: ProjectType;
-    selectedFeatures: string[];
-    hourlyRate: number;
-}
+
 
 interface EstimateFormProps{
     onCalculate: (values:EstimateFormValues)=> void
@@ -17,14 +14,14 @@ export function EstimateForm({
 }:EstimateFormProps){
     const [projectType, setprojectType] = useState<ProjectType>("portfolio")
     
-    const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+    const [selectedFeatureIds, setSelectedFeatureIds] = useState<string[]>([]);
 
     const [hourlyRate, sethourlyRate] = useState<number>(50)
 
     const [error, setError] = useState("")
 
     function handleFeatureToggle(featureId: string){
-        setSelectedFeatures((currentFeatures)=>{
+        setSelectedFeatureIds((currentFeatures)=>{
             const isSelected = currentFeatures.includes(featureId)
 
             if (isSelected){
@@ -48,7 +45,7 @@ export function EstimateForm({
 
         onCalculate({
             projectType,
-            selectedFeatures,
+            selectedFeatureIds,
             hourlyRate
         })
 
@@ -114,7 +111,7 @@ export function EstimateForm({
     
             <div className="grid gap-3 md:grid-cols-2">
               {featureOptions.map((feature) => {
-                const isSelected = selectedFeatures.includes(feature.id);
+                const isSelected = selectedFeatureIds.includes(feature.id);
     
                 return (
                   <label

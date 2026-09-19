@@ -36,3 +36,9 @@ export interface Estimate {
 
   createdAt: string;
 }
+
+export interface EstimateFormValues {
+  projectType: ProjectType;
+  selectedFeatureIds: string[]; 
+  hourlyRate: number;
+}
