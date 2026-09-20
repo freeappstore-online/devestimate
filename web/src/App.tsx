@@ -16,14 +16,12 @@ export default function App() {
 
   const [estimate, setEstimate] = useState<Estimate | null>(null)
 
-  useEffect(()=>{
+  useEffect(() => {
     const savedEstimate = getEstimate()
-     if (savedEstimate){
-      setEstimate(estimate)
-
-     }
-
-  },[])
+    if (savedEstimate) {
+      setEstimate(savedEstimate)
+    }
+  }, [])
 
   function handleCalculate(values: EstimateFormValues){
     const newEstimate = calculateEstimate(values)
