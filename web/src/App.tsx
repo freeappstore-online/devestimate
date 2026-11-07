@@ -10,7 +10,7 @@ import type { Estimate,EstimateFormValues } from './types'
 
 
 
-const fas = initApp({ appId: 'my-app' })
+const fas = initApp({ appId: 'devestimate' })
 
 export default function App() {
 
