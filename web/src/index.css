@@ -152,6 +152,9 @@ body::after {
 
 #root {
   min-height: 100dvh;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   isolation: isolate;
@@ -207,26 +210,37 @@ a:focus-visible {
 
 /* FreeAppStore Shell topbar — keep Sign in / toggles usable on narrow screens */
 #root > div > header {
-  gap: 0.5rem;
-  min-width: 0;
   box-sizing: border-box;
   width: 100%;
-  padding-left: max(0.75rem, env(safe-area-inset-left));
-  padding-right: max(0.75rem, env(safe-area-inset-right));
+  max-width: 100%;
+  min-width: 0;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+  overflow-x: clip;
+  padding-left: max(0.5rem, env(safe-area-inset-left)) !important;
+  padding-right: max(0.5rem, env(safe-area-inset-right)) !important;
 }
 
 #root > div > header > div {
   min-width: 0;
+  max-width: 100%;
 }
 
 #root > div > header > div:first-child {
-  flex: 1 1 auto;
+  flex: 1 1 8rem;
   overflow: hidden;
+  gap: 0.45rem !important;
+}
+
+#root > div > header > div:first-child > a {
+  flex-shrink: 0;
 }
 
 #root > div > header > div:first-child span {
   display: inline-block;
-  max-width: min(42vw, 10rem);
+  min-width: 0;
+  max-width: min(36vw, 8.5rem);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -234,20 +248,35 @@ a:focus-visible {
 }
 
 #root > div > header > div:last-child {
-  flex: 0 0 auto;
-  flex-wrap: nowrap;
-  gap: 0.35rem;
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.35rem !important;
+  margin-left: auto;
 }
 
-@media (max-width: 480px) {
+#root > div > header > div:last-child > button,
+#root > div > header > div:last-child > div {
+  flex-shrink: 0;
+}
+
+#root > div > header > div:last-child > button:not([aria-label]) {
+  font-size: 0.85rem !important;
+  padding: 0.5rem 0.9rem !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
   #root > div > header {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
   }
 
-  #root > div > header > div:last-child button {
-    font-size: 0.8rem !important;
-    padding: 0.45rem 0.7rem !important;
+  #root > div > header > div:last-child > button:not([aria-label]) {
+    font-size: 0.78rem !important;
+    padding: 0.4rem 0.65rem !important;
   }
 
   #root > div > header > div:last-child button[aria-label] {
@@ -257,8 +286,38 @@ a:focus-visible {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 420px) {
   #root > div > header > div:first-child span {
     display: none;
+  }
+
+  /* Text-size control is secondary; drop it first when space is tight */
+  #root > div > header > div:last-child > button[aria-label^="Text:"] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 340px) {
+  #root > div > header > div:last-child > button:not([aria-label]) {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.55rem !important;
+  }
+
+  #root > div > header > div:last-child button[aria-label] {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+.app-shell,
+.app-shell__header {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 420px) {
+  .app-shell__header .display-font {
+    font-size: 1.05rem;
+    line-height: 1.2;
   }
 }
