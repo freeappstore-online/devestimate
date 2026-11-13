@@ -204,3 +204,61 @@ a:focus-visible {
 }
 
 } /* end @layer base */
+
+/* FreeAppStore Shell topbar — keep Sign in / toggles usable on narrow screens */
+#root > div > header {
+  gap: 0.5rem;
+  min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: max(0.75rem, env(safe-area-inset-left));
+  padding-right: max(0.75rem, env(safe-area-inset-right));
+}
+
+#root > div > header > div {
+  min-width: 0;
+}
+
+#root > div > header > div:first-child {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+#root > div > header > div:first-child span {
+  display: inline-block;
+  max-width: min(42vw, 10rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+#root > div > header > div:last-child {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+
+@media (max-width: 480px) {
+  #root > div > header {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  #root > div > header > div:last-child button {
+    font-size: 0.8rem !important;
+    padding: 0.45rem 0.7rem !important;
+  }
+
+  #root > div > header > div:last-child button[aria-label] {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #root > div > header > div:first-child span {
+    display: none;
+  }
+}
