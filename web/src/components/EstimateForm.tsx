@@ -3,22 +3,28 @@ import type { ProjectType } from "../types";
 import { useState } from "react";
 import type { EstimateFormValues } from "../types";
 
-
-
-interface EstimateFormProps{
-    onCalculate: (values:EstimateFormValues)=> void
+export interface EstimateFormProps {
+  onCalculate: (values: EstimateFormValues) => void;
+  initialValues?: EstimateFormValues;
 }
 
 export function EstimateForm({
-    onCalculate
-}:EstimateFormProps){
-    const [projectType, setprojectType] = useState<ProjectType>("portfolio")
-    
-    const [selectedFeatureIds, setSelectedFeatureIds] = useState<string[]>([]);
+  onCalculate,
+  initialValues,
+}: EstimateFormProps) {
+  const [projectType, setprojectType] = useState<ProjectType>(
+    initialValues?.projectType ?? "portfolio",
+  );
 
-    const [hourlyRate, sethourlyRate] = useState<number>(50)
+  const [selectedFeatureIds, setSelectedFeatureIds] = useState<string[]>(
+    initialValues?.selectedFeatureIds ?? [],
+  );
 
-    const [error, setError] = useState("")
+  const [hourlyRate, sethourlyRate] = useState<number>(
+    initialValues?.hourlyRate ?? 50,
+  );
+
+  const [error, setError] = useState("");
 
     function handleFeatureToggle(featureId: string){
         setSelectedFeatureIds((currentFeatures)=>{
